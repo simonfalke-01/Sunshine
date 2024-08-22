@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-latest-large
 
     steps:
     - name: Checkout code
@@ -25,6 +25,12 @@ jobs:
       if: env.PACKAGE_MANAGER == 'macports'
       run: |
         sudo port install avahi boost180 cmake curl doxygen graphviz libopus miniupnpc npm9 pkgconfig python311 py311-pip
+
+    - name: Configure SSL
+      run: |
+        pushd /usr/local/include
+        ln -s ../opt/openssl/include/openssl .
+        popd
 
     - name: Configure CMake
       working-directory: ./build
