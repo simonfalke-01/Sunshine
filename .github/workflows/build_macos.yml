@@ -40,7 +40,7 @@ jobs:
 
     - name: Build the project
       working-directory: ./build
-      run: make -j $(sysctl -n hw.ncpu) -DBUILD_WERROR=OFF
+      run: make -j $(sysctl -n hw.ncpu)
 
     - name: Package the build
       working-directory: ./build
