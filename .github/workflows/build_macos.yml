@@ -14,7 +14,7 @@ jobs:
         submodules: recursive
 
     - name: ls
-      run: ls /usr/local/opt
+      run: ls /usr/local/opt/runner
 
     - name: Set up build
       run: mkdir build
