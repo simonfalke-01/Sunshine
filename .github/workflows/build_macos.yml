@@ -28,7 +28,7 @@ jobs:
 
     - name: Configure CMake
       working-directory: ./build
-      run: cmake -DBOOST_ROOT=$(brew --prefix boost) .
+      run: cmake -DBOOST_ROOT=$(brew --prefix boost) ..
 
     - name: Build the project
       working-directory: ./build
