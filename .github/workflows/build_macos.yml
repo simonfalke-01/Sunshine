@@ -1,0 +1,40 @@
+name: macOS Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Homebrew
+      run: |
+        brew update
+        brew install boost cmake doxygen graphviz miniupnpc node opus pkg-config python@3.11
+
+    - name: Install dependencies (MacPorts alternative)
+      if: env.PACKAGE_MANAGER == 'macports'
+      run: |
+        sudo port install avahi boost180 cmake curl doxygen graphviz libopus miniupnpc npm9 pkgconfig python311 py311-pip
+
+    - name: Configure CMake
+      run: cmake -DBOOST_ROOT=$(brew --prefix boost) ..
+
+    - name: Build the project
+      run: make -j $(sysctl -n hw.ncpu)
+
+    - name: Package the build
+      run: cpack -G DragNDrop
+
+    - name: ls
+      run: ls
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-artifact
+        path: ./path-to-your-dmg-file/*.dmg  # Update this path with the correct location of the DMG file
