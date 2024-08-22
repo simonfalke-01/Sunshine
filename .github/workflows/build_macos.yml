@@ -22,7 +22,7 @@ jobs:
         brew link openssl --force
 
     - name: ls
-      run: ls /usr/local/opt/
+      run: ls /opt/homebrew/Cellar/openssl@3/3.3.1
       
     - name: Set up Homebrew
       run: |
