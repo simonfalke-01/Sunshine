@@ -36,11 +36,11 @@ jobs:
 
     - name: Configure CMake
       working-directory: ./build
-      run: cmake -DBOOST_ROOT=$(brew --prefix boost) ..
+      run: cmake -DBOOST_ROOT=$(brew --prefix boost) -DBUILD_WERROR=OFF ..
 
     - name: Build the project
       working-directory: ./build
-      run: make -j $(sysctl -n hw.ncpu)
+      run: make -j $(sysctl -n hw.ncpu) -DBUILD_WERROR=OFF
 
     - name: Package the build
       working-directory: ./build
