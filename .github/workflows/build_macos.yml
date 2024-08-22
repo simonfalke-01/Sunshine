@@ -28,9 +28,8 @@ jobs:
 
     - name: Configure SSL
       run: |
-        pushd /usr/local/include
-        ln -s ../opt/openssl/include/openssl .
-        popd
+        brew reinstall openssl
+        brew link openssl --force
 
     - name: Configure CMake
       working-directory: ./build
