@@ -8,6 +8,8 @@ set(MACOS_LINK_DIRECTORIES
         /usr/local/lib
         /opt/homebrew/Cellar/openssl@3/3.3.1/lib)
 
+include_directories(/opt/homebrew/Cellar/openssl@3/3.3.1/include)
+
 foreach(dir ${MACOS_LINK_DIRECTORIES})
     if(EXISTS ${dir})
         link_directories(${dir})
