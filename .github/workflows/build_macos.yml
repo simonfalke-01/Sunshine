@@ -13,11 +13,16 @@ jobs:
       with:
         submodules: recursive
 
-    - name: ls
-      run: ls /usr/local/opt/runner
-
     - name: Set up build
       run: mkdir build
+
+    - name: Configure SSL
+      run: |
+        brew reinstall openssl
+        brew link openssl --force
+
+    - name: ls
+      run: ls /usr/local/opt/
       
     - name: Set up Homebrew
       run: |
@@ -28,11 +33,6 @@ jobs:
       if: env.PACKAGE_MANAGER == 'macports'
       run: |
         sudo port install avahi boost180 cmake curl doxygen graphviz libopus miniupnpc npm9 pkgconfig python311 py311-pip
-
-    - name: Configure SSL
-      run: |
-        brew reinstall openssl
-        brew link openssl --force
 
     - name: Configure CMake
       working-directory: ./build
