@@ -1,0 +1,25 @@
+name: macOS Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up Homebrew
+      run: |
+        brew update
+        brew install boost cmake doxygen graphviz miniupnpc node opus pkg-config python@3.11
+        brew tap LizardByte/homebrew
+        brew install sunshine
+        
+
+    - name: Install dependencies (MacPorts alternative)
+      if: env.PACKAGE_MANAGER == 'macports'
+      run: |
+        sudo port install avahi boost180 cmake curl doxygen graphviz libopus miniupnpc npm9 pkgconfig python311 py311-pip
