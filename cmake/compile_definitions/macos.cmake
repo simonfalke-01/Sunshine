@@ -5,7 +5,8 @@ add_compile_definitions(SUNSHINE_PLATFORM="macos")
 set(MACOS_LINK_DIRECTORIES
         /opt/homebrew/lib
         /opt/local/lib
-        /usr/local/lib)
+        /usr/local/lib
+        /opt/homebrew/Cellar/openssl@3/3.3.1/lib)
 
 foreach(dir ${MACOS_LINK_DIRECTORIES})
     if(EXISTS ${dir})
