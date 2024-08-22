@@ -10,10 +10,7 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
-    - name: ls
-      run: ls
-
+      
     - name: Set up Homebrew
       run: |
         brew update
@@ -25,7 +22,7 @@ jobs:
         sudo port install avahi boost180 cmake curl doxygen graphviz libopus miniupnpc npm9 pkgconfig python311 py311-pip
 
     - name: Configure CMake
-      run: cmake -DBOOST_ROOT=$(brew --prefix boost) ..
+      run: cmake -DBOOST_ROOT=$(brew --prefix boost) .
 
     - name: Build the project
       run: make -j $(sysctl -n hw.ncpu)
